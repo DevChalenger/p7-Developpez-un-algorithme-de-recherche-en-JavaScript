@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Les petits plats</title>
+    <link rel="shortcut icon" href="./assets/logo.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./style/css/style.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <img src="./assets/LesPetitsPlatsLogo.png" />
+      </header>
+      <section class="search-section">
+        <form id="block-search">
+          <input
+            type="search"
+            class="search-field"
+            id="main-search"
+            placeholder="Rechercher une recette"
+            minlength="3"
+          />
+          <button class="button-search" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+
+        <div id="block-filter">
+          <div name="filter-by-ingredients" id="filter-by-ingredients">
+            <span value="">Ingredient</span>
+          </div>
+          <div name="filter-by-appareils" id="filter-by-appareils">
+            <span value="">Appareils</span>
+          </div>
+          <div name="filter-by-ustensile" id="filter-by-ustensile">
+            <span value="">Ustensile</span>
+          </div>
+        </div>
+      </section>
+      <section id="recipe-section" class="recipe-section"></section>
+      <div id="no-content-recipe" class="no-content-recipe">
+        <span
+          >Nous sommes désolé nous n'avons pas trouvé ce que vous vouler
+          rechercher</span
+        >
+      </div>
+    </main>
+    <script src="./scripts/data/recipes.js"></script>
+    <script src="./scripts/js/recipeFactorie.js"></script>
+    <script src="./scripts/js/sortCategories.js"></script>
+    <script src="./scripts/js/principalSearch.js"></script>
+    <script src="./scripts/js/recipePage.js"></script>
+  </body>
+</html>
