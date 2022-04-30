@@ -15,4 +15,5 @@ function sortCategeories(data) {
   const stringUstensiles = [...new Set(ustensileCategories)];
   const stringIngredients = [...new Set(ingredientCategories)];
   const stringAppliances = [...new Set(ingredientCategories)];
+  new filterFactory(stringIngredients, stringUstensiles, stringAppliances);
 }

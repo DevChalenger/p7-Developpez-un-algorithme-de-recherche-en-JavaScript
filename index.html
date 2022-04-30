@@ -34,17 +34,35 @@
           </button>
         </form>
 
-        <div id="block-filter">
-          <div name="filter-by-ingredients" id="filter-by-ingredients">
-            <span value="">Ingredient</span>
+        <article id="block-filter">
+          <div id="filter-by-ingredients" class="filter-sort">
+            <div class="filter-header">
+              <span>Ingredient</span>
+              <button class="btn-filter">
+                <i class="fa-solid fa-angle-down"></i>
+              </button>
+            </div>
+            <div id="ingredient-content" class="content"></div>
           </div>
-          <div name="filter-by-appareils" id="filter-by-appareils">
-            <span value="">Appareils</span>
+          <div class="filter-sort" id="filter-by-appliances">
+            <div class="filter-header">
+              Appareils
+              <button class="btn-filter">
+                <i class="fa-solid fa-angle-down"></i>
+              </button>
+            </div>
+            <div id="appliance-content" class="content"></div>
           </div>
-          <div name="filter-by-ustensile" id="filter-by-ustensile">
-            <span value="">Ustensile</span>
+          <div class="filter-sort" id="filter-by-ustensiles">
+            <div class="filter-header">
+              <span>Ustensile</span>
+              <button class="btn-filter">
+                <i class="fa-solid fa-angle-down"></i>
+              </button>
+            </div>
+            <div id="ustensiles-content"></div>
           </div>
-        </div>
+        </article>
       </section>
       <section id="recipe-section" class="recipe-section"></section>
       <div id="no-content-recipe" class="no-content-recipe">
@@ -55,7 +73,8 @@
       </div>
     </main>
     <script src="./scripts/data/recipes.js"></script>
-    <script src="./scripts/js/recipeFactorie.js"></script>
+    <script src="./scripts/js/factories/recipeFactorie.js"></script>
+    <script src="./scripts/js/factories/filterFatories.js"></script>
     <script src="./scripts/js/sortCategories.js"></script>
     <script src="./scripts/js/principalSearch.js"></script>
     <script src="./scripts/js/recipePage.js"></script>

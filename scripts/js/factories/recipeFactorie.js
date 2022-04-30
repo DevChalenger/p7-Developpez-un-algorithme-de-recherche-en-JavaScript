@@ -1,11 +1,5 @@
 function recipeFactory(data) {
-  const {
-    name,
-
-    ingredients,
-    time,
-    description,
-  } = data;
+  const { name, ingredients, time, description } = data;
   function recipeCardDom() {
     const article = document.createElement("article");
     article.classList.add("recipe-container");

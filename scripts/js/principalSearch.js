@@ -4,7 +4,7 @@ function mainSearch(data) {
   const searchField = document.getElementById("main-search");
   const recipeSection = document.getElementById("recipe-section");
   const errorBlock = document.getElementById("no-content-recipe");
-  console.log(recipeSection);
+
   searchField.addEventListener("keyup", (event) => {
     event.preventDefault();
     const input = searchField.value.toLowerCase();
@@ -26,11 +26,13 @@ function mainSearch(data) {
       console.log(result);
       document.querySelector(".recipe-section").innerHTML = "";
       displayRecipe(result);
+      sortCategeories(result);
       searchField.removeEventListener("keyup", () => {});
     }
     if (input.length < 3) {
       document.querySelector(".recipe-section").innerHTML = "";
       displayRecipe(recipeList);
+      sortCategeories(recipeList);
     }
     if (recipeSection.childNodes.length == 0) {
       errorBlock.style.display = "block";
