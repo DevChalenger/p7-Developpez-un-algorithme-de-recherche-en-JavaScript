@@ -4,7 +4,7 @@ function mainSearch(data) {
   const searchField = document.getElementById("main-search");
   const recipeSection = document.getElementById("recipe-section");
   const errorBlock = document.getElementById("no-content-recipe");
-
+  sortCategeories(recipeList);
   searchField.addEventListener("keyup", (event) => {
     event.preventDefault();
     const input = searchField.value.toLowerCase();
@@ -23,8 +23,8 @@ function mainSearch(data) {
     });
 
     if (input.length >= 3) {
-      console.log(result);
       document.querySelector(".recipe-section").innerHTML = "";
+
       displayRecipe(result);
       sortCategeories(result);
       searchField.removeEventListener("keyup", () => {});
