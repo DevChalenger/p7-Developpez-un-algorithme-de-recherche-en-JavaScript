@@ -3,6 +3,7 @@ function recipeFactory(data) {
   function recipeCardDom() {
     const article = document.createElement("article");
     article.classList.add("recipe-container");
+
     //recipe picture empty//
     const recipeImg = document.createElement("div");
     recipeImg.classList.add("recipe-img");

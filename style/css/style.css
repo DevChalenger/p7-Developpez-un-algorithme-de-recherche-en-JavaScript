@@ -59,12 +59,39 @@ body main .search-section #block-search .button-search i {
 }
 
 body main .search-section #block-tag {
-  background-color: rgba(255, 0, 0, 0.5);
   width: 100%;
-  height: 30px;
+  color: white;
   margin: 1em 0;
   display: flex;
+  flex-wrap: wrap;
+}
+
+body main .search-section #block-tag .tag-block-key {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  font-size: 0.9em;
+  padding: 1em;
+  border-radius: 2em;
+  margin-right: 1em;
+}
+
+body main .search-section #block-tag .tag-block-key i {
+  margin-left: 0.5em;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+body main .search-section #block-tag .tag-block-ingredients {
+  background-color: #3282f7;
+}
+
+body main .search-section #block-tag .tag-block-appliances {
+  background-color: #68d9a4;
+}
+
+body main .search-section #block-tag .tag-block-ustensils {
+  background-color: #ed6454;
 }
 
 body main .search-section #block-filter {

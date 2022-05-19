@@ -1,5 +1,5 @@
 class filterFactory {
-  constructor(ingredient, ustensil, appliance) {
+  constructor(ingredient, ustensil, appliance, data) {
     new filterDom();
 
     new ingredientDom(ingredient);
@@ -7,6 +7,8 @@ class filterFactory {
     new ustensilDom(ustensil);
 
     new applianceDom(appliance);
+
+    new filterTag(data);
   }
 }
 
@@ -81,6 +83,29 @@ class ingredientDom {
     const blockIngredient = document.getElementById("ingredient-content");
     const searchIngredient = document.getElementById("Ingredients-search");
     const tagBlock = document.getElementById("block-tag");
+
+    function ingredientCreate(element) {
+      const capitalize = element.charAt(0).toUpperCase() + element.slice(1);
+      const text = document.createElement("p");
+      text.classList.add("text-tag");
+      text.textContent = capitalize;
+      text.addEventListener("click", () => {
+        const ingredientTag = document.createElement("div");
+        ingredientTag.classList.add("tag-block-key", "tag-block-ingredients");
+        const ingredientTagText = document.createElement("span");
+        ingredientTagText.classList.add("key-tag-text");
+        const deleteTag = document.createElement("i");
+        deleteTag.addEventListener("click", () => {
+          ingredientTag.remove();
+        });
+        deleteTag.classList.add("fa-regular", "fa-circle-xmark", "delete-tag");
+        ingredientTagText.textContent = capitalize;
+        ingredientTag.appendChild(ingredientTagText);
+        ingredientTag.appendChild(deleteTag);
+        tagBlock.appendChild(ingredientTag);
+      });
+      blockIngredient.appendChild(text);
+    }
     blockIngredient.innerHTML = "";
     searchIngredient.addEventListener("keyup", () => {
       const input = searchIngredient.value.toLowerCase();
@@ -92,28 +117,12 @@ class ingredientDom {
           return ingredient.includes(input);
         })
         .forEach((element) => {
-          let capitalize = element.charAt(0).toUpperCase() + element.slice(1);
-          console.log(capitalize);
-          const text = document.createElement("p");
-          text.textContent = capitalize;
-          text.addEventListener("click", () => {
-            alert(text.textContent);
-          });
-          blockIngredient.appendChild(text);
+          ingredientCreate(element);
         });
     });
-    for (let i = 0; i < ingredients.length; i++) {
-      const element = ingredients[i];
-      const capitalize = element.charAt(0).toUpperCase() + element.slice(1);
-      const text = document.createElement("p");
-      text.textContent = capitalize;
-      text.addEventListener("click", () => {
-        const ingredientTag = document.createElement("div");
-        const ingredientTagText = document.createElement("span");
-        ingredientTagText.textContent = capitalize;
-      });
-      blockIngredient.appendChild(text);
-    }
+    ingredients.forEach((element) => {
+      ingredientCreate(element);
+    });
   }
 }
 class applianceDom {
@@ -122,6 +131,28 @@ class applianceDom {
     const searchAplliance = document.getElementById("Appareils-search");
     const tagBlock = document.getElementById("block-tag");
 
+    function applianceCreate(element) {
+      let capitalize = element.charAt(0).toUpperCase() + element.slice(1);
+      const text = document.createElement("p");
+      text.classList.add("text-tag");
+      text.textContent = capitalize;
+      text.addEventListener("click", () => {
+        const applianceTag = document.createElement("div");
+        applianceTag.classList.add("tag-block-key", "tag-block-appliances");
+        const applianceTagText = document.createElement("span");
+        applianceTagText.classList.add("key-tag-text");
+        const deleteTag = document.createElement("i");
+        deleteTag.classList.add("fa-regular", "fa-circle-xmark", "delete-tag");
+        deleteTag.addEventListener("click", () => {
+          applianceTag.remove();
+        });
+        applianceTagText.textContent = capitalize;
+        applianceTag.appendChild(applianceTagText);
+        applianceTag.appendChild(deleteTag);
+        tagBlock.appendChild(applianceTag);
+      });
+      blockAplliance.appendChild(text);
+    }
     blockAplliance.innerHTML = "";
     searchAplliance.addEventListener("keyup", () => {
       const input = searchAplliance.value.toLowerCase();
@@ -132,18 +163,11 @@ class applianceDom {
           return appliance.includes(input);
         })
         .forEach((element) => {
-          let capitalize = element.charAt(0).toUpperCase() + element.slice(1);
-          const text = document.createElement("p");
-
-          text.textContent = capitalize;
-          blockAplliance.appendChild(text);
+          applianceCreate(element);
         });
     });
     appliances.forEach((element) => {
-      let capitalize = element.charAt(0).toUpperCase() + element.slice(1);
-      const text = document.createElement("p");
-      text.textContent = capitalize;
-      blockAplliance.appendChild(text);
+      applianceCreate(element);
     });
   }
 }
@@ -153,27 +177,149 @@ class ustensilDom {
     const searchUstensil = document.getElementById("Ustensiles-search");
     const tagBlock = document.getElementById("block-tag");
 
+    function ustensilCreate(element) {
+      let capitalize = element.charAt(0).toUpperCase() + element.slice(1);
+      const text = document.createElement("p");
+      text.classList.add("text-tag");
+      text.textContent = capitalize;
+      text.addEventListener("click", () => {
+        const ustensilTag = document.createElement("div");
+        ustensilTag.classList.add("tag-block-key", "tag-block-ustensils");
+        const ustensilTagText = document.createElement("span");
+        ustensilTagText.classList.add("key-tag-text");
+        const deleteTag = document.createElement("i");
+        deleteTag.classList.add("fa-regular", "fa-circle-xmark", "delete-tag");
+        deleteTag.addEventListener("click", () => {
+          ustensilTag.remove();
+        });
+        ustensilTagText.textContent = capitalize;
+        ustensilTag.appendChild(ustensilTagText);
+        ustensilTag.appendChild(deleteTag);
+        tagBlock.appendChild(ustensilTag);
+      });
+      blockUstensil.appendChild(text);
+    }
+
     blockUstensil.innerHTML = "";
     searchUstensil.addEventListener("keyup", () => {
+      blockUstensil.innerHTML = "";
       const input = searchUstensil.value.toLowerCase();
       ustensils
         .filter((ustensil) => {
-          blockUstensil.innerHTML = "";
-
           return ustensil.includes(input);
         })
         .forEach((element) => {
-          let capitalize = element.charAt(0).toUpperCase() + element.slice(1);
-          const text = document.createElement("p");
-          text.textContent = capitalize;
-          blockUstensil.appendChild(text);
+          ustensilCreate(element);
         });
     });
+
     ustensils.forEach((element) => {
-      let capitalize = element.charAt(0).toUpperCase() + element.slice(1);
-      const text = document.createElement("p");
-      text.textContent = capitalize;
-      blockUstensil.appendChild(text);
+      ustensilCreate(element);
+    });
+  }
+}
+
+class filterTag {
+  constructor(data) {
+    const recipeList = data;
+
+    const textTag = document.querySelectorAll(".text-tag");
+
+    let array = [];
+
+    textTag.forEach((text) => {
+      text.addEventListener("click", () => {
+        /*  array = []; */
+        document.querySelector(".recipe-section").innerHTML = "";
+        const keyTag = document.querySelectorAll(".key-tag-text");
+
+        Array.from(keyTag).forEach((value) => {
+          if (!array.includes(value.textContent.toLowerCase())) {
+            array.push(value.textContent.toLowerCase());
+          }
+        });
+        const arrayUnique = [...new Set(array)];
+
+        const result = recipeList.filter((element) => {
+          return (
+            element.ingredients.some((ingredients) =>
+              arrayUnique.includes(ingredients.ingredient.toLowerCase())
+            ) ||
+            arrayUnique.includes(element.appliance.toLowerCase()) ||
+            element.ustensils.some((ustensil) =>
+              arrayUnique.includes(ustensil.toLowerCase())
+            )
+          );
+        });
+        const deleteTag = document.querySelectorAll(".delete-tag");
+        /*  deleteTag.forEach((tagDeleted) => {
+          tagDeleted.addEventListener("click", () => {
+            /* array = []; 
+
+            document.querySelector(".recipe-section").innerHTML = "";
+
+            const arrayUnique = [...new Set(array)];
+            const result = recipeList.filter((element) => {
+              return (
+                element.ingredients.some((ingredients) =>
+                  arrayUnique.includes(ingredients.ingredient.toLowerCase())
+                ) ||
+                arrayUnique.includes(element.appliance.toLowerCase()) ||
+                element.ustensils.some((ustensil) =>
+                  arrayUnique.includes(ustensil.toLowerCase())
+                )
+              );
+            });
+
+            array.pop();
+            if (array.length < 1) {
+              array = [];
+              displayRecipe(recipeList);
+            } else {
+              displayRecipe(result);
+              console.log("test");
+            }
+            console.log(array);
+          });
+        }); */
+        for (let i = 0; i < deleteTag.length; i++) {
+          const tagDeleted = deleteTag[i];
+          tagDeleted.addEventListener("click", () => {
+            /* array = []; */
+
+            document.querySelector(".recipe-section").innerHTML = "";
+            let selectValue =
+              tagDeleted.parentNode.firstChild.textContent.toLowerCase();
+            let myIndex = array.indexOf(selectValue);
+
+            if (myIndex !== -1) {
+              array.splice(myIndex, 1);
+            }
+            const arrayUnique = [...new Set(array)];
+            const result = recipeList.filter((element) => {
+              return (
+                element.ingredients.some((ingredients) =>
+                  arrayUnique.includes(ingredients.ingredient.toLowerCase())
+                ) ||
+                arrayUnique.includes(element.appliance.toLowerCase()) ||
+                element.ustensils.some((ustensil) =>
+                  arrayUnique.includes(ustensil.toLowerCase())
+                )
+              );
+            });
+            console.log(array);
+            if (array.length < 1) {
+              array = [];
+              displayRecipe(recipeList);
+            } else {
+              displayRecipe(result);
+              console.log("test");
+            }
+          });
+        }
+        mainSearch(result);
+        displayRecipe(result);
+      });
     });
   }
 }
