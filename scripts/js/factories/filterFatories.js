@@ -2,13 +2,13 @@ class filterFactory {
   constructor(ingredient, ustensil, appliance, data) {
     new filterDom();
 
-    new ingredientDom(ingredient);
+    new ingredientDom(ingredient, data);
 
-    new ustensilDom(ustensil);
+    new ustensilDom(ustensil, data);
 
-    new applianceDom(appliance);
+    new applianceDom(appliance, data);
 
-    new filterTag(data);
+    filterTag(data);
   }
 }
 
@@ -79,7 +79,7 @@ class filterDom {
   }
 }
 class ingredientDom {
-  constructor(ingredients) {
+  constructor(ingredients, data) {
     const blockIngredient = document.getElementById("ingredient-content");
     const searchIngredient = document.getElementById("Ingredients-search");
     const tagBlock = document.getElementById("block-tag");
@@ -119,6 +119,7 @@ class ingredientDom {
         .forEach((element) => {
           ingredientCreate(element);
         });
+      filterTag(data);
     });
     ingredients.forEach((element) => {
       ingredientCreate(element);
@@ -126,7 +127,7 @@ class ingredientDom {
   }
 }
 class applianceDom {
-  constructor(appliances) {
+  constructor(appliances, data) {
     const blockAplliance = document.getElementById("appliance-content");
     const searchAplliance = document.getElementById("Appareils-search");
     const tagBlock = document.getElementById("block-tag");
@@ -165,6 +166,7 @@ class applianceDom {
         .forEach((element) => {
           applianceCreate(element);
         });
+      filterTag(data);
     });
     appliances.forEach((element) => {
       applianceCreate(element);
@@ -172,7 +174,7 @@ class applianceDom {
   }
 }
 class ustensilDom {
-  constructor(ustensils) {
+  constructor(ustensils, data) {
     const blockUstensil = document.getElementById("ustensiles-content");
     const searchUstensil = document.getElementById("Ustensiles-search");
     const tagBlock = document.getElementById("block-tag");
@@ -211,6 +213,7 @@ class ustensilDom {
         .forEach((element) => {
           ustensilCreate(element);
         });
+      filterTag(data);
     });
 
     ustensils.forEach((element) => {
@@ -219,107 +222,75 @@ class ustensilDom {
   }
 }
 
-class filterTag {
-  constructor(data) {
-    const recipeList = data;
+function filterTag(data) {
+  const recipeList = data;
 
-    const textTag = document.querySelectorAll(".text-tag");
+  const textTag = document.querySelectorAll(".text-tag");
 
-    let array = [];
+  let array = [];
+  textTag.forEach((text) => {
+    text.addEventListener("click", () => {
+      document.querySelector(".recipe-section").innerHTML = "";
+      const keyTag = document.querySelectorAll(".key-tag-text");
+      array = [];
+      Array.from(keyTag).forEach((value) => {
+        if (!array.includes(value.textContent.toLowerCase())) {
+          array.push(value.textContent.toLowerCase());
+        }
+      });
 
-    textTag.forEach((text) => {
-      text.addEventListener("click", () => {
-        /*  array = []; */
-        document.querySelector(".recipe-section").innerHTML = "";
-        const keyTag = document.querySelectorAll(".key-tag-text");
+      const arrayUnique = [...new Set(array)];
 
-        Array.from(keyTag).forEach((value) => {
-          if (!array.includes(value.textContent.toLowerCase())) {
-            array.push(value.textContent.toLowerCase());
+      const result = recipeList.filter((element) => {
+        return (
+          element.ingredients.some((ingredients) =>
+            arrayUnique.includes(ingredients.ingredient.toLowerCase())
+          ) ||
+          arrayUnique.includes(element.appliance.toLowerCase()) ||
+          element.ustensils.some((ustensil) =>
+            arrayUnique.includes(ustensil.toLowerCase())
+          )
+        );
+      });
+
+      const deleteTag = document.querySelectorAll(".delete-tag");
+      for (let i = 0; i < deleteTag.length; i++) {
+        const tagDeleted = deleteTag[i];
+
+        tagDeleted.addEventListener("click", (event) => {
+          /* array = []; */
+          event.preventDefault();
+          document.querySelector(".recipe-section").innerHTML = "";
+          let selectValue =
+            tagDeleted.parentNode.firstChild.textContent.toLowerCase();
+          let myIndex = array.indexOf(selectValue);
+
+          if (myIndex !== -1) {
+            array.splice(myIndex, 1);
+          }
+          const arrayUnique = [...new Set(array)];
+          const result = recipeList.filter((element) => {
+            return (
+              element.ingredients.some((ingredients) =>
+                arrayUnique.includes(ingredients.ingredient.toLowerCase())
+              ) ||
+              arrayUnique.includes(element.appliance.toLowerCase()) ||
+              element.ustensils.some((ustensil) =>
+                arrayUnique.includes(ustensil.toLowerCase())
+              )
+            );
+          });
+
+          if (!array.length) {
+            array = [];
+            displayRecipe(recipeList);
+          } else {
+            displayRecipe(result);
           }
         });
-        const arrayUnique = [...new Set(array)];
+      }
 
-        const result = recipeList.filter((element) => {
-          return (
-            element.ingredients.some((ingredients) =>
-              arrayUnique.includes(ingredients.ingredient.toLowerCase())
-            ) ||
-            arrayUnique.includes(element.appliance.toLowerCase()) ||
-            element.ustensils.some((ustensil) =>
-              arrayUnique.includes(ustensil.toLowerCase())
-            )
-          );
-        });
-        const deleteTag = document.querySelectorAll(".delete-tag");
-        /*  deleteTag.forEach((tagDeleted) => {
-          tagDeleted.addEventListener("click", () => {
-            /* array = []; 
-
-            document.querySelector(".recipe-section").innerHTML = "";
-
-            const arrayUnique = [...new Set(array)];
-            const result = recipeList.filter((element) => {
-              return (
-                element.ingredients.some((ingredients) =>
-                  arrayUnique.includes(ingredients.ingredient.toLowerCase())
-                ) ||
-                arrayUnique.includes(element.appliance.toLowerCase()) ||
-                element.ustensils.some((ustensil) =>
-                  arrayUnique.includes(ustensil.toLowerCase())
-                )
-              );
-            });
-
-            array.pop();
-            if (array.length < 1) {
-              array = [];
-              displayRecipe(recipeList);
-            } else {
-              displayRecipe(result);
-              console.log("test");
-            }
-            console.log(array);
-          });
-        }); */
-        for (let i = 0; i < deleteTag.length; i++) {
-          const tagDeleted = deleteTag[i];
-          tagDeleted.addEventListener("click", () => {
-            /* array = []; */
-
-            document.querySelector(".recipe-section").innerHTML = "";
-            let selectValue =
-              tagDeleted.parentNode.firstChild.textContent.toLowerCase();
-            let myIndex = array.indexOf(selectValue);
-
-            if (myIndex !== -1) {
-              array.splice(myIndex, 1);
-            }
-            const arrayUnique = [...new Set(array)];
-            const result = recipeList.filter((element) => {
-              return (
-                element.ingredients.some((ingredients) =>
-                  arrayUnique.includes(ingredients.ingredient.toLowerCase())
-                ) ||
-                arrayUnique.includes(element.appliance.toLowerCase()) ||
-                element.ustensils.some((ustensil) =>
-                  arrayUnique.includes(ustensil.toLowerCase())
-                )
-              );
-            });
-            console.log(array);
-            if (array.length < 1) {
-              array = [];
-              displayRecipe(recipeList);
-            } else {
-              displayRecipe(result);
-              console.log("test");
-            }
-          });
-        }
-        mainSearch(result);
-        displayRecipe(result);
-      });
+      displayRecipe(result);
     });
-  }
+  });
 }

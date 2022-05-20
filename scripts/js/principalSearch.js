@@ -4,7 +4,7 @@ function mainSearch(data) {
   const searchField = document.getElementById("main-search");
   const recipeSection = document.getElementById("recipe-section");
   const errorBlock = document.getElementById("no-content-recipe");
-
+  const keyTag = document.getElementById("block-tag");
   searchField.addEventListener("keyup", (event) => {
     event.preventDefault();
     const input = event.target.value.toLowerCase();
@@ -22,25 +22,49 @@ function mainSearch(data) {
         )
       );
     });
+    function filterSet(dataFilter) {
+      let array = [];
+      array = [];
+      keyTag.childNodes.forEach((value) => {
+        array.push(value.firstChild.textContent.toLowerCase());
+      });
+      const arrayUnique = [...new Set(array)];
+
+      const resultFilter = dataFilter.filter((element) => {
+        return (
+          element.ingredients.some((ingredients) =>
+            arrayUnique.includes(ingredients.ingredient.toLowerCase())
+          ) ||
+          arrayUnique.includes(element.appliance.toLowerCase()) ||
+          element.ustensils.some((ustensil) =>
+            arrayUnique.includes(ustensil.toLowerCase())
+          )
+        );
+      });
+      displayRecipe(resultFilter);
+    }
 
     if (input.length >= 3) {
       document.querySelector(".recipe-section").innerHTML = "";
-      console.log(result);
       displayRecipe(result);
       sortCategeories(result);
-      console.log(result);
-      searchField.removeEventListener("keyup", () => {});
-    }
-    if (input.length < 3) {
+      if (keyTag.firstChild) {
+        document.querySelector(".recipe-section").innerHTML = "";
+        console.log("test");
+        filterSet(result);
+      }
+    } else {
       document.querySelector(".recipe-section").innerHTML = "";
-
       displayRecipe(recipeList);
       sortCategeories(recipeList);
+      if (keyTag.firstChild) {
+        document.querySelector(".recipe-section").innerHTML = "";
+        console.log("test");
+        filterSet(recipeList);
+      }
     }
-    /*  if (input.length < 1) {
-      document.getElementById("block-tag").innerHTML = "";
-    } */
-    if (recipeSection.childNodes.length == 0) {
+
+    if (!recipeSection.childNodes.length) {
       errorBlock.style.display = "block";
     } else {
       errorBlock.style.display = "none";
