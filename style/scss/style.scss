@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+$Primary-color: #3282f7;
+$Second-color: #68d9a4;
+$Third-color: #ed6454;
 body {
   outline: none;
 
@@ -48,31 +51,121 @@ body {
           }
         }
       }
+      #block-tag {
+        width: 100%;
+        color: white;
+        margin: 1em 0;
+        display: flex;
+        flex-wrap: wrap;
+        .tag-block-key {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 0.9em;
+          padding: 1em;
+          border-radius: 2em;
+          margin-right: 1em;
+          i {
+            margin-left: 0.5em;
+            font-size: 1.2em;
+            cursor: pointer;
+          }
+        }
+        .tag-block-ingredients {
+          background-color: $Primary-color;
+        }
+        .tag-block-appliances {
+          background-color: $Second-color;
+        }
+        .tag-block-ustensils {
+          background-color: $Third-color;
+        }
+      }
       #block-filter {
         margin: 1em 0;
         display: flex;
+        justify-content: space-between;
+        width: 390px;
 
-        div {
-          width: 100px;
-          height: 50px;
-          appearance: none;
-          color: white;
-          border: none;
-          outline: none;
-          border-radius: 3px;
-          margin-right: 0.75em;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
         #filter-by-ingredients {
-          background-color: #3282f7;
+          background-color: $Primary-color;
         }
-        #filter-by-appareils {
-          background-color: #68d9a4;
+        #filter-by-appliances {
+          background-color: $Second-color;
         }
-        #filter-by-ustensile {
-          background-color: #ed6454;
+        #filter-by-ustensiles {
+          background-color: $Third-color;
+        }
+        .filter-sort {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          color: white;
+          border-radius: 0.2em;
+
+          margin-right: 1em;
+          padding: 0.8em 0.4em;
+
+          .filter-header {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-left: 0.3em;
+            padding-right: 0.3em;
+            .search-filter {
+              background-color: inherit;
+              border: none;
+              outline: none;
+              color: white;
+              font-size: 1.1em;
+              &::placeholder {
+                color: white;
+              }
+            }
+          }
+          .btn-filter {
+            background-color: inherit;
+            border: none;
+            color: white;
+            font-size: 1em;
+
+            cursor: pointer;
+            .button-hidden {
+              display: none;
+            }
+          }
+          .content {
+            margin-top: 0.5em;
+            height: 250px;
+            width: 100%;
+            overflow: hidden;
+            p {
+              width: 30%;
+              display: inline-block;
+              cursor: pointer;
+              margin: 0.5em;
+              flex: 1 1 100px;
+            }
+          }
+          .hide-content {
+            display: none;
+          }
+          .show-content {
+            display: block;
+          }
+        }
+        .filter-sort-close {
+          flex-direction: column;
+          justify-content: center;
+          max-height: 45px;
+        }
+        .filter-sort-open {
+          flex-direction: row;
+          min-width: 500px;
+
+          flex-wrap: wrap;
+          justify-content: space-between;
         }
       }
     }
