@@ -5,9 +5,11 @@ function mainSearch(data) {
   const recipeSection = document.getElementById("recipe-section");
   const errorBlock = document.getElementById("no-content-recipe");
   const keyTag = document.getElementById("block-tag");
+
   searchField.addEventListener("keyup", (event) => {
     event.preventDefault();
-    const input = event.target.value.toLowerCase();
+    const input = searchField.value.toLowerCase();
+    console.log(searchField.value);
     console.log(input);
     const result = recipeList.filter((element) => {
       return (
@@ -25,9 +27,11 @@ function mainSearch(data) {
     function filterSet(dataFilter) {
       let array = [];
       array = [];
+
       keyTag.childNodes.forEach((value) => {
         array.push(value.firstChild.textContent.toLowerCase());
       });
+
       const arrayUnique = [...new Set(array)];
 
       const resultFilter = dataFilter.filter((element) => {
@@ -42,25 +46,26 @@ function mainSearch(data) {
         );
       });
       displayRecipe(resultFilter);
+      sortCategeories(resultFilter);
     }
 
     if (input.length >= 3) {
-      document.querySelector(".recipe-section").innerHTML = "";
-      displayRecipe(result);
-      sortCategeories(result);
       if (keyTag.firstChild) {
         document.querySelector(".recipe-section").innerHTML = "";
-        console.log("test");
         filterSet(result);
+      } else {
+        document.querySelector(".recipe-section").innerHTML = "";
+        displayRecipe(result);
+        sortCategeories(result);
       }
     } else {
-      document.querySelector(".recipe-section").innerHTML = "";
-      displayRecipe(recipeList);
-      sortCategeories(recipeList);
       if (keyTag.firstChild) {
         document.querySelector(".recipe-section").innerHTML = "";
-        console.log("test");
         filterSet(recipeList);
+      } else {
+        document.querySelector(".recipe-section").innerHTML = "";
+        displayRecipe(recipeList);
+        sortCategeories(recipeList);
       }
     }
 
