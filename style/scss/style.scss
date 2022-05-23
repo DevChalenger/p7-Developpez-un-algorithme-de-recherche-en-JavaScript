@@ -51,28 +51,46 @@ body {
       #block-filter {
         margin: 1em 0;
         display: flex;
-
-        div {
-          width: 100px;
-          height: 50px;
-          appearance: none;
-          color: white;
-          border: none;
-          outline: none;
-          border-radius: 3px;
-          margin-right: 0.75em;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+        justify-content: space-between;
+        width: 390px;
         #filter-by-ingredients {
           background-color: #3282f7;
         }
-        #filter-by-appareils {
+        #filter-by-appliances {
           background-color: #68d9a4;
         }
-        #filter-by-ustensile {
+        #filter-by-ustensiles {
           background-color: #ed6454;
+        }
+        .filter-sort {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          color: white;
+          border-radius: 0.2em;
+          min-width: 120px;
+          padding: 0.8em 0.4em;
+          .filter-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+          }
+          .btn-filter {
+            background-color: inherit;
+            border: none;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            .button-hidden {
+              display: none;
+            }
+          }
+          .content {
+            display: none;
+          }
+          .show-content {
+            display: block;
+          }
         }
       }
     }
