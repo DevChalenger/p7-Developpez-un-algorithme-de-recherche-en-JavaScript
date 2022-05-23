@@ -35,7 +35,7 @@ class filterDom {
       const filterSearch = document.createElement("input");
       filterSearch.type = "hidden";
       filterSearch.classList.add("search-filter");
-      filterSearch.placeholder = `Recherchez un ${titleText[i].toLowerCase()}`;
+
       filterSearch.setAttribute("id", `${titleText[i] + "-search"}`);
       const titleFilter = document.createElement("span");
       titleFilter.textContent = titleText[i];
@@ -61,12 +61,16 @@ class filterDom {
           iconOpen.classList.add("button-hidden");
           content[i].classList.add("show-content");
           blockFilter[i].classList.add("filter-sort-open");
+          filterSearch.placeholder = `Recherchez un ${titleText[
+            i
+          ].toLowerCase()}`;
           filterSearch.type = "text";
           titleFilter.textContent = "";
         } else {
           iconOpen.classList.remove("button-hidden");
           content[i].classList.remove("show-content");
           blockFilter[i].classList.remove("filter-sort-open");
+          filterSearch.removeAttribute("placeholder");
           iconClose.classList.add("button-hidden");
           content[i].classList.add("hide-content");
 
@@ -258,7 +262,6 @@ function filterTag(data) {
         const tagDeleted = deleteTag[i];
 
         tagDeleted.addEventListener("click", (event) => {
-          /* array = []; */
           event.preventDefault();
           document.querySelector(".recipe-section").innerHTML = "";
           let selectValue =
