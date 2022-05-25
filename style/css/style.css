@@ -171,6 +171,11 @@ body main .search-section #block-filter .filter-sort .content p {
   flex: 1 1 100px;
 }
 
+body main .search-section #block-filter .filter-sort .content .disabled {
+  color: #cccccc;
+  pointer-events: none;
+}
+
 body main .search-section #block-filter .filter-sort .hide-content {
   display: none;
 }

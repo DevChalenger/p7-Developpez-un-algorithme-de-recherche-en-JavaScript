@@ -5,12 +5,10 @@ function mainSearch(data) {
   const recipeSection = document.getElementById("recipe-section");
   const errorBlock = document.getElementById("no-content-recipe");
   const keyTag = document.getElementById("block-tag");
-
   searchField.addEventListener("keyup", (event) => {
     event.preventDefault();
     const input = searchField.value.toLowerCase();
-    console.log(searchField.value);
-    console.log(input);
+
     const result = recipeList.filter((element) => {
       return (
         element.description.toLowerCase().includes(input) ||
@@ -25,28 +23,42 @@ function mainSearch(data) {
       );
     });
     function filterSet(dataFilter) {
-      let array = [];
-      array = [];
-
-      keyTag.childNodes.forEach((value) => {
-        array.push(value.firstChild.textContent.toLowerCase());
+      const keyTagText = document.querySelectorAll(".key-tag-text");
+      const textTag = document.querySelectorAll(".text-tag");
+      textTag.forEach((text) => {
+        if (dataFilter.length == 1) {
+          text.classList.add("disabled");
+        } else {
+          text.classList.remove("disabled");
+        }
+        keyTag.childNodes.forEach((value) => {
+          if (value.firstChild.textContent == text.textContent) {
+            text.classList.add("disabled");
+          } else {
+            text.classList.remove("disabled");
+          }
+        });
       });
+      let array = Array.from(keyTagText);
 
-      const arrayUnique = [...new Set(array)];
-
+      console.log(array);
       const resultFilter = dataFilter.filter((element) => {
-        return (
-          element.ingredients.some((ingredients) =>
-            arrayUnique.includes(ingredients.ingredient.toLowerCase())
-          ) ||
-          arrayUnique.includes(element.appliance.toLowerCase()) ||
-          element.ustensils.some((ustensil) =>
-            arrayUnique.includes(ustensil.toLowerCase())
-          )
-        );
+        return array.every((filt) => {
+          const filterText = filt.textContent.toLowerCase();
+
+          return (
+            element.ingredients.some((ingredients) => {
+              return ingredients.ingredient.toLowerCase().includes(filterText);
+            }) ||
+            element.appliance.toLowerCase().includes(filterText) ||
+            element.ustensils.some((ustensil) => {
+              return ustensil.toLowerCase().includes(filterText);
+            })
+          );
+        });
       });
       displayRecipe(resultFilter);
-      sortCategeories(resultFilter);
+      sortCategeories(resultFilter, resultFilter);
     }
 
     if (input.length >= 3) {
@@ -56,17 +68,13 @@ function mainSearch(data) {
       } else {
         document.querySelector(".recipe-section").innerHTML = "";
         displayRecipe(result);
-        sortCategeories(result);
+        sortCategeories(result, result);
       }
     } else {
-      if (keyTag.firstChild) {
-        document.querySelector(".recipe-section").innerHTML = "";
-        filterSet(recipeList);
-      } else {
-        document.querySelector(".recipe-section").innerHTML = "";
-        displayRecipe(recipeList);
-        sortCategeories(recipeList);
-      }
+      document.querySelector(".recipe-section").innerHTML = "";
+      keyTag.innerHTML = "";
+      displayRecipe(recipeList);
+      sortCategeories(recipeList, recipeList);
     }
 
     if (!recipeSection.childNodes.length) {

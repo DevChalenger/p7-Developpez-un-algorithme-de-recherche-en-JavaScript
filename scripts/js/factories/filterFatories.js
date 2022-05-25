@@ -93,6 +93,7 @@ class ingredientDom {
       const text = document.createElement("p");
       text.classList.add("text-tag");
       text.textContent = capitalize;
+
       text.addEventListener("click", () => {
         const ingredientTag = document.createElement("div");
         ingredientTag.classList.add("tag-block-key", "tag-block-ingredients");
@@ -151,11 +152,13 @@ class applianceDom {
         deleteTag.addEventListener("click", () => {
           applianceTag.remove();
         });
+
         applianceTagText.textContent = capitalize;
         applianceTag.appendChild(applianceTagText);
         applianceTag.appendChild(deleteTag);
         tagBlock.appendChild(applianceTag);
       });
+
       blockAplliance.appendChild(text);
     }
     blockAplliance.innerHTML = "";
@@ -231,30 +234,26 @@ function filterTag(data) {
 
   const textTag = document.querySelectorAll(".text-tag");
 
-  let array = [];
   textTag.forEach((text) => {
     text.addEventListener("click", () => {
       document.querySelector(".recipe-section").innerHTML = "";
       const keyTag = document.querySelectorAll(".key-tag-text");
-      array = [];
-      Array.from(keyTag).forEach((value) => {
-        if (!array.includes(value.textContent.toLowerCase())) {
-          array.push(value.textContent.toLowerCase());
-        }
-      });
-
-      const arrayUnique = [...new Set(array)];
+      let array = Array.from(keyTag);
 
       const result = recipeList.filter((element) => {
-        return (
-          element.ingredients.some((ingredients) =>
-            arrayUnique.includes(ingredients.ingredient.toLowerCase())
-          ) ||
-          arrayUnique.includes(element.appliance.toLowerCase()) ||
-          element.ustensils.some((ustensil) =>
-            arrayUnique.includes(ustensil.toLowerCase())
-          )
-        );
+        return array.every((filt) => {
+          const filterText = filt.textContent.toLowerCase();
+
+          return (
+            element.ingredients.some((ingredients) => {
+              return ingredients.ingredient.toLowerCase().includes(filterText);
+            }) ||
+            element.appliance.toLowerCase().includes(filterText) ||
+            element.ustensils.some((ustensil) => {
+              return ustensil.toLowerCase().includes(filterText);
+            })
+          );
+        });
       });
 
       const deleteTag = document.querySelectorAll(".delete-tag");
@@ -264,36 +263,70 @@ function filterTag(data) {
         tagDeleted.addEventListener("click", (event) => {
           event.preventDefault();
           document.querySelector(".recipe-section").innerHTML = "";
-          let selectValue =
-            tagDeleted.parentNode.firstChild.textContent.toLowerCase();
+
+          text.classList.remove("disabled");
+          let selectValue = tagDeleted.parentNode.firstChild;
           let myIndex = array.indexOf(selectValue);
 
           if (myIndex !== -1) {
             array.splice(myIndex, 1);
           }
-          const arrayUnique = [...new Set(array)];
+
           const result = recipeList.filter((element) => {
-            return (
-              element.ingredients.some((ingredients) =>
-                arrayUnique.includes(ingredients.ingredient.toLowerCase())
-              ) ||
-              arrayUnique.includes(element.appliance.toLowerCase()) ||
-              element.ustensils.some((ustensil) =>
-                arrayUnique.includes(ustensil.toLowerCase())
-              )
-            );
+            return array.every((filt) => {
+              const filterText = filt.textContent.toLowerCase();
+
+              return (
+                element.ingredients.some((ingredients) => {
+                  return ingredients.ingredient
+                    .toLowerCase()
+                    .includes(filterText);
+                }) ||
+                element.appliance.toLowerCase().includes(filterText) ||
+                element.ustensils.some((ustensil) => {
+                  return ustensil.toLowerCase().includes(filterText);
+                })
+              );
+            });
           });
 
           if (!array.length) {
             array = [];
             displayRecipe(recipeList);
+            sortCategeories(recipeList, recipeList);
           } else {
             displayRecipe(result);
+            sortCategeories(result, recipeList);
           }
         });
       }
-
+      if (recipeList.length == 1) {
+        text.classList.add("disabled");
+      } else {
+        text.classList.remove("disabled");
+      }
       displayRecipe(result);
+      sortCategeories(result, recipeList);
+    });
+  });
+}
+function disableTag(data) {
+  const recipeList = data;
+  const keyTag = document.querySelectorAll(".key-tag-text");
+  const textTag = document.querySelectorAll(".text-tag");
+  let array = Array.from(keyTag);
+
+  textTag.forEach((text) => {
+    if (recipeList.length <= 1) {
+      text.classList.add("disabled");
+    } else {
+      text.classList.remove("disabled");
+    }
+    console.log(data);
+    array.forEach((filter) => {
+      if (text.textContent.includes(filter.textContent)) {
+        text.classList.add("disabled");
+      }
     });
   });
 }
