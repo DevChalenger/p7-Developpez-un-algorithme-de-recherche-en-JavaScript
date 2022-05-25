@@ -147,6 +147,10 @@ body {
               margin: 0.5em;
               flex: 1 1 100px;
             }
+            .disabled {
+              color: #cccccc;
+              pointer-events: none;
+            }
           }
           .hide-content {
             display: none;
