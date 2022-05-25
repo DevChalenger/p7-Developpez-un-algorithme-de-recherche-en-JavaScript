@@ -1,4 +1,4 @@
-function sortCategories(data) {
+function sortCategeories(data, initialData) {
   const recipeList = data;
   const ingredientCategories = [];
   const appliancesCatgeories = [];
@@ -20,6 +20,8 @@ function sortCategories(data) {
     stringIngredients,
     stringUstensiles,
     stringAppliances,
-    recipeList
+    initialData
   );
+
+  disableTag(recipeList);
 }

@@ -17,6 +17,6 @@ async function initRecipe() {
   const { recipesData } = await getRecipe();
   displayRecipe(recipesData);
   mainSearch(recipesData);
-  sortCategories(recipesData);
+  sortCategeories(recipesData, recipesData);
 }
 initRecipe();
