@@ -109,6 +109,7 @@ class ingredientDom {
         ingredientTag.appendChild(deleteTag);
         tagBlock.appendChild(ingredientTag);
       });
+
       blockIngredient.appendChild(text);
     }
     blockIngredient.innerHTML = "";
@@ -123,6 +124,7 @@ class ingredientDom {
         })
         .forEach((element) => {
           ingredientCreate(element);
+          disableTag(data);
         });
       filterTag(data);
     });
@@ -172,6 +174,7 @@ class applianceDom {
         })
         .forEach((element) => {
           applianceCreate(element);
+          disableTag(data);
         });
       filterTag(data);
     });
@@ -219,6 +222,7 @@ class ustensilDom {
         })
         .forEach((element) => {
           ustensilCreate(element);
+          disableTag(data);
         });
       filterTag(data);
     });
@@ -322,9 +326,9 @@ function disableTag(data) {
     } else {
       text.classList.remove("disabled");
     }
-    console.log(data);
-    array.forEach((filter) => {
-      if (text.textContent.includes(filter.textContent)) {
+    console.log(text);
+    array.map((filter) => {
+      if (text.textContent == filter.textContent) {
         text.classList.add("disabled");
       }
     });
