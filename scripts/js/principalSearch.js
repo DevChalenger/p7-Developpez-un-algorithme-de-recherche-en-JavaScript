@@ -5,23 +5,36 @@ function mainSearch(data) {
   const recipeSection = document.getElementById("recipe-section");
   const errorBlock = document.getElementById("no-content-recipe");
   const keyTag = document.getElementById("block-tag");
+
   searchField.addEventListener("keyup", (event) => {
     event.preventDefault();
     const input = searchField.value.toLowerCase();
+    let array = [];
 
-    const result = recipeList.filter((element) => {
-      return (
-        element.description.toLowerCase().includes(input) ||
-        element.appliance.toLowerCase().includes(input) ||
-        element.name.toLowerCase().startsWith(input) ||
-        element.ingredients.some((ingredient) =>
-          ingredient.ingredient.toLowerCase().includes(input)
-        ) ||
-        element.ustensils.some((ustensil) =>
-          ustensil.toLowerCase().includes(input)
-        )
-      );
-    });
+    for (let i = 0; i < recipeList.length; i++) {
+      let element = recipeList[i];
+
+      const ingredient = () => {
+        for (let g = 0; g < element.ingredients.length; g++) {
+          const ingredients = element.ingredients[g];
+          return ingredients.ingredient.toLowerCase().includes(input);
+        }
+      };
+
+      const ustensil = () => {
+        for (let g = 0; g < element.ustensils.length; g++) {
+          const ustensils = element.ustensils[g];
+          return ustensils.toLowerCase().includes(input);
+        }
+      };
+
+      const name = element.name.toLowerCase().includes(input);
+      const description = element.description.toLowerCase().includes(input);
+      const appliance = element.appliance.toLowerCase().includes(input);
+      if (name || description || appliance || ingredient() || ustensil()) {
+        array.push(element);
+      }
+    }
     function filterSet(dataFilter) {
       const keyTagText = document.querySelectorAll(".key-tag-text");
       const textTag = document.querySelectorAll(".text-tag");
@@ -60,15 +73,14 @@ function mainSearch(data) {
       displayRecipe(resultFilter);
       sortCategeories(resultFilter, resultFilter);
     }
-
     if (input.length >= 3) {
       if (keyTag.firstChild) {
         document.querySelector(".recipe-section").innerHTML = "";
-        filterSet(result);
+        filterSet(array);
       } else {
         document.querySelector(".recipe-section").innerHTML = "";
-        displayRecipe(result);
-        sortCategeories(result, result);
+        displayRecipe(array);
+        sortCategeories(array, array);
       }
     } else {
       document.querySelector(".recipe-section").innerHTML = "";
