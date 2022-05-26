@@ -329,6 +329,7 @@ function disableTag(data) {
     console.log(text);
     array.map((filter) => {
       if (text.textContent == filter.textContent) {
+
         text.classList.add("disabled");
       }
     });

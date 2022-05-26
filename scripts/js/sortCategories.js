@@ -20,8 +20,8 @@ function sortCategeories(data, initialData) {
     stringIngredients,
     stringUstensiles,
     stringAppliances,
-
     initialData
   );
+
   disableTag(recipeList);
 }
