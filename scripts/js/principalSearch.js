@@ -20,7 +20,6 @@ function mainSearch(data) {
           return ingredients.ingredient.toLowerCase().includes(input);
         }
       };
-
       const ustensil = () => {
         for (let g = 0; g < element.ustensils.length; g++) {
           const ustensils = element.ustensils[g];
@@ -53,6 +52,7 @@ function mainSearch(data) {
         });
       });
       let array = Array.from(keyTagText);
+
 
       console.log(array);
       const resultFilter = dataFilter.filter((element) => {
@@ -88,14 +88,12 @@ function mainSearch(data) {
       displayRecipe(recipeList);
       sortCategeories(recipeList, recipeList);
     }
-
-    if (!recipeSection.childNodes.length) {
+    if (recipeSection.childNodes.length == 0) {
       errorBlock.style.display = "block";
     } else {
       errorBlock.style.display = "none";
     }
   });
-
   form.addEventListener("submit", (event) => {
     event.preventDefault();
   });
