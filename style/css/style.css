@@ -40,7 +40,8 @@ body main .search-section #block-search .search-field {
   border: none;
 }
 
-body main .search-section #block-search .search-field:focus, body main .search-section #block-search .search-field:active {
+body main .search-section #block-search .search-field:focus,
+body main .search-section #block-search .search-field:active {
   border: none;
   outline: none;
 }
@@ -132,7 +133,13 @@ body main .search-section #block-filter .filter-sort .filter-header {
   padding-right: 0.3em;
 }
 
-body main .search-section #block-filter .filter-sort .filter-header .search-filter {
+body
+  main
+  .search-section
+  #block-filter
+  .filter-sort
+  .filter-header
+  .search-filter {
   background-color: inherit;
   border: none;
   outline: none;
@@ -140,7 +147,13 @@ body main .search-section #block-filter .filter-sort .filter-header .search-filt
   font-size: 1.1em;
 }
 
-body main .search-section #block-filter .filter-sort .filter-header .search-filter::placeholder {
+body
+  main
+  .search-section
+  #block-filter
+  .filter-sort
+  .filter-header
+  .search-filter::placeholder {
   color: white;
 }
 
@@ -152,7 +165,13 @@ body main .search-section #block-filter .filter-sort .btn-filter {
   cursor: pointer;
 }
 
-body main .search-section #block-filter .filter-sort .btn-filter .button-hidden {
+body
+  main
+  .search-section
+  #block-filter
+  .filter-sort
+  .btn-filter
+  .button-hidden {
   display: none;
 }
 
@@ -234,7 +253,13 @@ body main .recipe-section .recipe-container .recipe-text .recipe-header {
   align-items: flex-start;
 }
 
-body main .recipe-section .recipe-container .recipe-text .recipe-header .recipe-time {
+body
+  main
+  .recipe-section
+  .recipe-container
+  .recipe-text
+  .recipe-header
+  .recipe-time {
   display: flex;
   font-weight: bold;
   justify-content: space-between;
@@ -259,17 +284,36 @@ body main .recipe-section .recipe-container .recipe-text .recipe-step-block {
   justify-content: space-between;
 }
 
-body main .recipe-section .recipe-container .recipe-text .recipe-step-block .ingredient-block {
+body
+  main
+  .recipe-section
+  .recipe-container
+  .recipe-text
+  .recipe-step-block
+  .ingredient-block {
   max-height: 100%;
   word-wrap: break-word;
   height: 100%;
 }
 
-body main .recipe-section .recipe-container .recipe-text .recipe-step-block .summary-block {
+body
+  main
+  .recipe-section
+  .recipe-container
+  .recipe-text
+  .recipe-step-block
+  .summary-block {
   width: 40%;
 }
 
-body main .recipe-section .recipe-container .recipe-text .recipe-step-block .summary-block p {
+body
+  main
+  .recipe-section
+  .recipe-container
+  .recipe-text
+  .recipe-step-block
+  .summary-block
+  p {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -moz-box-orient: vertical;
