@@ -88,12 +88,14 @@ function mainSearch(data) {
       displayRecipe(recipeList);
       sortCategeories(recipeList, recipeList);
     }
-    if (recipeSection.childNodes.length == 0) {
+
+    if (!recipeSection.childNodes.length) {
       errorBlock.style.display = "block";
     } else {
       errorBlock.style.display = "none";
     }
   });
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
   });
